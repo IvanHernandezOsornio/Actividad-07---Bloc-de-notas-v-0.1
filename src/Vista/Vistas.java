@@ -42,7 +42,7 @@ public class Vistas extends javax.swing.JFrame {
 
         jMenu1.setText("Archivo");
 
-        jb_archivo.setText("Leer");
+        jb_archivo.setText("Abrir Archivo");
         jMenu1.add(jb_archivo);
 
         jb_guardar.setText("Guardar");

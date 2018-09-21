@@ -12,10 +12,10 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
+        // IComponentes MVC.
         Modelos modelblocnotas = new Modelos();
         Vistas viewblocnotas = new Vistas();
-        Controladores ontrollerblocnotas = new Controladores(modelblocnotas, viewblocnotas); // Integra los componentes del modelo MVC.
+        Controladores ontrollerblocnotas = new Controladores(modelblocnotas, viewblocnotas); 
         
     }
     

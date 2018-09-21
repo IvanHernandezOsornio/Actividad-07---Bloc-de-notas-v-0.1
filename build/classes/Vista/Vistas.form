@@ -17,7 +17,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jb_archivo">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Leer"/>
+                <Property name="text" type="java.lang.String" value="Abrir Archivo"/>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>

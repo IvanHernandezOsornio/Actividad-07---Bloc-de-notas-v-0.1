@@ -19,7 +19,7 @@ public class Modelos {
         this.path = path;
     }
     
-    private String message = ""; // Variable que almacena el contenido (texto) del área de texto de "ViewBlocNotasv1".
+    private String message = ""; // Almacena el contenido 
 
     public String getMessage() {
         return message;

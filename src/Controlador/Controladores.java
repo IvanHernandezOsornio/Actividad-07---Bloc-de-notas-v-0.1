@@ -21,23 +21,23 @@ import java.io.PrintWriter;
 
 public class Controladores {
     
-    Modelos modelocnotas; // Crea un objeto para acceder al contenido del Model.
-    Vistas vistanotas; // Crea un objeto para acceder al contenido de la View.
+    Modelos modelocnotas; // Crea un objeto para modelos
+    Vistas vistanotas; // Crea un objeto para vistas
     
     ActionListener actionlistener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (e.getSource() == vistanotas.jb_archivo) { // Comprueba si se selecciona el ítem "Leer".
-                jmi_leer_action_performed();
+            if (e.getSource() == vistanotas.jb_archivo) { 
+                jb_archivo_action_performed();
             }
-            else if (e.getSource() == vistanotas.jb_guardar) { // Comprueba si se selecciona el ítem "Guardar".
-                jmi_guardar_action_performed();
+            else if (e.getSource() == vistanotas.jb_guardar) { 
+                jb_guardar_action_performed();
             }
         }
     };
     
     /**
-     * Método para integrar los componentes del módelo MVC.
+     * Métodologia MVC.
      * @param modelBloc
      * @param viewBloc 
      */
@@ -51,42 +51,41 @@ public class Controladores {
     }
     
     /**
-     * Método para el ítem "Leer" del menú (ViewBlocNotasv1).
+     * Método para el boton archivo
      */
-    public void jmi_leer_action_performed() {
-        this.readFile(modelocnotas.getPath()); // Invoca al método "readFile" y le da como parámetro el contenido de la variable "path" (Ubicada en el Model).
+    public void jb_archivo_action_performed() {
+        this.readFile(modelocnotas.getPath()); // Usa el motodo readFile y combinado con la variable PATH
     }
     
     /**
-     * Método para el ítem "Guardar" del menú (ViewBlocNotasv1).
+     * Método para el boton guardar
      */
-    public void jmi_guardar_action_performed() {
-        modelocnotas.setMessage(vistanotas.j_bloc_notas.getText()); // Asigna el contenido del área de texto (interfaz) a la variable "message".
-        this.writeFile(modelocnotas.getPath(), modelocnotas.getMessage()); // Invoca al método "writeFile" y le da como parámetros el contenido de la variable "path" y de la variable "message" (ubicadas en el Model).
+    public void jb_guardar_action_performed() {
+        modelocnotas.setMessage(vistanotas.j_bloc_notas.getText()); //lleva el contenido a la pantalla
+        this.writeFile(modelocnotas.getPath(), modelocnotas.getMessage()); 
     }
     
     
-// Métodos para la lectura y escritura del archivo de texto...
-    
+    // Métodos de ESCRITURA Y BUSQUEDA
     /**
-     * Método para mostrar en el área de texto, el contenido del archivo.
-     * @param path: Indica la ruta de almacenamiento del archivo a manipular.
+     * Método para mostrar  contenido del archivo.
+     * @param path: Indica la ruta de almacenamiento del archivo.
      * @return 
      */
     public String readFile (String path) {
         try {
-            String row; // Variable que indica una "fila".
-            try (FileReader archivo = new FileReader(path)) { // Permite leer el contenido del archivo.
-                BufferedReader bufferedreader = new BufferedReader(archivo); // Permite almacenar el contenido del archivo de texto de forma temporal.
+            String row; // Se utiliza para ver filas.
+            try (FileReader archivo = new FileReader(path)) { // Ver el contenido del archivo
+                BufferedReader bufferedreader = new BufferedReader(archivo); // Almacena el contenido hasta que sea guardado
                 while ((row = bufferedreader.readLine()) != null ) {
                     vistanotas.j_bloc_notas.setText(row);
                 }
             }
         }
-        catch (FileNotFoundException err) { // Detecta un error en caso de no encontrar el archivo en el path indicado.
+        catch (FileNotFoundException err) { // Muestra errores 
             System.err.println("Archivo no encontrado: " + err.getMessage());
         }
-        catch (IOException err) { // Marca error en caso de no contar con los permisos para acceder al archivo indicado.
+        catch (IOException err) { // Muestra error de no poder ver el archivo inticado
             System.err.println("Error en operación I/O: " + err.getMessage());
         }
         return null;
@@ -94,29 +93,30 @@ public class Controladores {
     
     /**
      * Método para escribir (guardar) nuevo contenido en el archivo.
-     * @param path: Indica la ruta de almacenamiento del archivo a manipular.
-     * @param message: Variable que almacena el contenido del área de texto.
+     * @param path: Ruta del archivo
+     * @param message: Es en donde se almacena el texto escrito
      */
     public void writeFile (String path, String message) {
         try {
-            File archivo = new File(path); // Abre el archivo de la ruta especificada, si no existe, lo crea (según el path o ruta).
-            FileWriter filewriter = new FileWriter(archivo, false); // Permite escribir en el archivo especificado.
+            File archivo = new File(path); // abre el archivo y si no existe crea uno nuevo
+            FileWriter filewriter = new FileWriter(archivo, false);
             
-            try (PrintWriter printwriter = new PrintWriter(filewriter) ) { // Permite guardar el nuevo contenido en del archivo especificado.
+            try (PrintWriter printwriter = new PrintWriter(filewriter) ) {
                 printwriter.println(message);
                 printwriter.close();
             }
         }
-        catch (FileNotFoundException err) { // Detecta un error en caso de no encontrar el archivo en el path indicado.
+        //Verifica si no hay errores
+        catch (FileNotFoundException err) { 
             System.err.println("Archivo no encontrado: " + err.getMessage());
         }
-        catch (IOException err) { // Marca error en caso de no contar con los permisos para acceder al archivo indicado.
+        catch (IOException err) { 
             System.err.println("Error en operación I/O: " + err.getMessage());
         }
     }
     
     /**
-     * Método para acceder a los componentes de la interfaz "ViewBlocNotasv1".
+     * Método de conponentes
      */
     public void initComponents() {
         vistanotas.setVisible(true);
